@@ -42,7 +42,7 @@ const Button: FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>(
   }
 )
 
-
+Button.displayName = 'Button';
 
 export { Button, buttonVariants }
 
