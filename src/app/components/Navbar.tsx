@@ -1,7 +1,8 @@
 import { FC } from 'react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/Button'
+import { buttonVariants } from '@/ui/Button'
+// import { Button } from '@/components/ui/Button'
 
 interface NavbarProps {}
 
@@ -12,7 +13,7 @@ const Navbar: FC<NavbarProps> = ({}) => {
         <Link href='/' className='text-dark-blue dark:text-slate-50 text-2xl font-bold'>
         Sportify
       </Link>
-      <Button variant='default' size='sm' >SignIn</Button>
+      <Link href='/sign-in' className={cn(buttonVariants())}>Sign In</Link>
     </div>
 
     </nav>
