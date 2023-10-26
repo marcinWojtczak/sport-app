@@ -6,6 +6,7 @@ import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 
 
+
 export const authOptions: NextAuthOptions = {
   
   providers: [
@@ -45,8 +46,9 @@ export const authOptions: NextAuthOptions = {
               
             return null
         }
-    })
+    }),
   ],
+  
 }
 
 export default NextAuth(authOptions)

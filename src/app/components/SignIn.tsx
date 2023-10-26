@@ -1,5 +1,5 @@
 import React from 'react'
-import { UserAuthForm } from './UserAuthForm'
+import { UserAuthForm } from './UserAuth'
 
 const SignIn = () => {
   return (

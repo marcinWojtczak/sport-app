@@ -1,10 +1,11 @@
 'use client'
-import { Button, buttonVariants } from './ui/Button'
+import { Button, buttonVariants } from '@/components/ui/Button'
 import { FC, useState } from 'react'
 import { cn } from '@/lib/utils'
-import { Icons } from './Icons'
+import { Icons } from '@/components/Icons'
 import { signIn } from 'next-auth/react'
 import { useToast } from '@/hooks/use-toast'
+import { AuthForm } from '@/components/AuthForm'
 
 
 
@@ -71,6 +72,14 @@ export const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => 
 
   return (
     <div className='flex flex-col gap-2 w-full'>
+        <AuthForm />
+
+        <div className='flex items-center mt-5'>
+            <div className='flex-1 h-[1px] bg-slate-400'></div>
+                <span className='mx-2 text-md text-slate-400'>or</span>
+            <div className='flex-1 h-[1px] bg-slate-400'></div>
+        </div>
+
         <Button 
             className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'bg-[#DB4437] hover:outline outline-1 outline-slate-300')}
             onClick={loginWithGoogle}
@@ -94,7 +103,8 @@ export const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => 
         >
             {githubIsLoading ? null : <Icons.Github className='mr-1'/>}
             Continue with GitHub
-        </Button> 
+        </Button>
+        
     </div>
   )
 }
