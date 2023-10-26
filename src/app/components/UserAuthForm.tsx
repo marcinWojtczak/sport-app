@@ -11,14 +11,15 @@ import { useToast } from '@/hooks/use-toast'
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement>{}
 
 export const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
-    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [facebookIsLoading, setFacebookIsLoading] = useState<boolean>(false)
+    const [googleIsLoading, setGoogleIsLoading] = useState<boolean>(false)
+    const [githubIsLoading, setGithubIsLoading] = useState<boolean>(false)
     const { toast } = useToast()
 
     const loginWithGoogle = async () => {
-        setIsLoading(true)
+        setGoogleIsLoading(true)
 
         try {
-            throw new Error('Error')
             await signIn('google')
         } catch(error){
             toast({
@@ -28,34 +29,70 @@ export const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => 
                 
             })
         }finally {
-            setIsLoading(false)
+            setGoogleIsLoading(false)
         }
     }
+
+    const loginWithFacebook = async () => {
+        setFacebookIsLoading(true)
+
+        try {
+            await signIn('facebook')
+        } catch(error){
+            toast({
+                title: 'There was a problem',
+                description: 'There was an error logging in with Facebook',
+                variant: 'destructive'
+                
+            })
+        }finally {
+            setFacebookIsLoading(false)
+        }
+    }
+
+    const loginWithGithub = async () => {
+        setGithubIsLoading(true)
+
+        try {
+            await signIn('github')
+        } catch(error){
+            toast({
+                title: 'There was a problem',
+                description: 'There was an error logging in with Github',
+                variant: 'destructive'
+                
+            })
+        }finally {
+            setGithubIsLoading(false)
+        }
+    }
+
+    
 
   return (
     <div className='flex flex-col gap-2 w-full'>
         <Button 
             className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'bg-[#DB4437] hover:outline outline-1 outline-slate-300')}
             onClick={loginWithGoogle}
-            isLoading={isLoading}
+            isLoading={googleIsLoading}
         >
-            {isLoading ? null : <Icons.Google className='mr-1'/>}
+            {googleIsLoading ? null : <Icons.Google className='mr-1'/>}
             Continue with Google
         </Button>
 
         <Button className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'bg-[#4267B2] hover:outline outline-1 outline-slate-300')}
-            onClick={loginWithGoogle}
-            isLoading={isLoading}
+            onClick={loginWithFacebook}
+            isLoading={facebookIsLoading}
         >
-            {isLoading ? null : <Icons.Facebook className='mr-1'/>}
+            {facebookIsLoading ? null : <Icons.Facebook className='mr-1'/>}
             Continue with Facebook
         </Button>
 
         <Button className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'bg-black hover:outline outline-1 outline-slate-300')}
-            onClick={loginWithGoogle}
-            isLoading={isLoading}
+            onClick={loginWithGithub}
+            isLoading={githubIsLoading}
         >
-            {isLoading ? null : <Icons.Github className='mr-1'/>}
+            {githubIsLoading ? null : <Icons.Github className='mr-1'/>}
             Continue with GitHub
         </Button> 
     </div>
