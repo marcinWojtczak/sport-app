@@ -75,9 +75,9 @@ export const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => 
         <AuthForm />
 
         <div className='flex items-center my-3'>
-            <div className='flex-1 h-[1px] bg-slate-400'></div>
-                <span className='mx-2 text-md text-slate-400'>or</span>
-            <div className='flex-1 h-[1px] bg-slate-400'></div>
+            <div className='flex-1 h-[1px] bg-muted-foreground'></div>
+                <span className='mx-2 text-md text-muted-foreground'>or</span>
+            <div className='flex-1 h-[1px] bg-muted-foreground'></div>
         </div>
 
         <Button 

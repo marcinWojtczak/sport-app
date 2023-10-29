@@ -6,7 +6,7 @@ export const AuthForm = () => {
     <form>
         <div className='flex flex-col items-center gap-1'>
             <div className='w-full'>
-                <label htmlFor='name' className='text-xs font-semibold text-slate-600'>User Name</label>
+                <label htmlFor='name' className='text-xs font-semibold text-muted-foreground'>User Name</label>
                 <input
                     id='name'
                     type='text'
@@ -17,7 +17,7 @@ export const AuthForm = () => {
             </div>
             
             <div className='w-full mb-1'>
-                <label htmlFor='email' className='text-xs font-semibold text-slate-600'>Email</label>
+                <label htmlFor='email' className='text-xs font-semibold text-muted-foreground'>Email</label>
                 <input
                     id='email'
                     type='emial'
