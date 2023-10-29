@@ -74,7 +74,7 @@ export const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => 
     <div className='flex flex-col gap-2 w-full'>
         <AuthForm />
 
-        <div className='flex items-center mt-5'>
+        <div className='flex items-center my-3'>
             <div className='flex-1 h-[1px] bg-slate-400'></div>
                 <span className='mx-2 text-md text-slate-400'>or</span>
             <div className='flex-1 h-[1px] bg-slate-400'></div>
@@ -104,7 +104,6 @@ export const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => 
             {githubIsLoading ? null : <Icons.Github className='mr-1'/>}
             Continue with GitHub
         </Button>
-        
     </div>
   )
 }

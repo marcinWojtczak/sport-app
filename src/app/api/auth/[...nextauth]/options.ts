@@ -43,12 +43,20 @@ export const authOptions: NextAuthOptions = {
             if (credentials?.username === user.name && credentials.password === user.password) {
                 return user
             }
-              
             return null
         }
     }),
   ],
-  
+
+  pages: {
+    signIn: '/sign-in'
+  },
+
+  callbacks: {
+    async redirect() {
+      return '/'
+    }
+  }
 }
 
 export default NextAuth(authOptions)
