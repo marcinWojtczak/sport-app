@@ -7,13 +7,11 @@ import { useRef, useEffect } from 'react'
 
 
 const Page = () => {
-  const searchParams = useSearchParams()
   const dialogRef = useRef<null | HTMLDialogElement>(null)
-  const showDialog = window.location.pathname
 
   useEffect(() => {
       dialogRef.current?.showModal()
-      console.log('terter')
+      
   }, [])
 
   return (
