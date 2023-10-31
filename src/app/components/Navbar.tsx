@@ -1,4 +1,4 @@
-import { FC } from 'react'
+
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/ui/Button'
@@ -21,7 +21,10 @@ const Navbar = async () => {
       {session?.user ? (
         <UserAccountNav user={session.user}/>
       ) : (
-        <Link href='/sign-in' className={cn(buttonVariants({ variant: 'outline'}), 'bg-dark-green')}>
+        <Link
+          href='/sign-in' 
+          className={cn(buttonVariants({ variant: 'outline'}), 'bg-dark-green')}
+        >
           Sign In
         </Link>
       )}

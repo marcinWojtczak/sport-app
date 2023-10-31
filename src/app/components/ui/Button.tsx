@@ -1,5 +1,4 @@
 import { ButtonHTMLAttributes, FC, forwardRef } from "react"
-import { Slot } from "@radix-ui/react-slot"
 import { cva, VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 import { Loader2 } from "lucide-react"
@@ -14,6 +13,7 @@ const buttonVariants = cva(
         outline: 'border border-input bg-accent hover:bg-accent hover:text-accent-foreground text-slate-50',
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        subtle: 'hover:bg-zinc-200 bg-zinc-100 text-zinc-900',
       },
       size: {
         default: "h-10 px-4 py-2",
