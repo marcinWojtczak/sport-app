@@ -1,19 +1,20 @@
-import { Avatar, AvatarFallback, AvatarImage, } from "@/components/ui/Avatar"
+import { Avatar,  AvatarImage, } from "@/components/ui/Avatar"
 import userImage from '@/public/user.png'
 import { User } from 'next-auth';
 
 interface UserAvatarProps  {
   user: Pick<User, 'name' | 'image'>
+  className?: string
 }
 
-export const UserAvatar = ({user}: UserAvatarProps) => {
+export const UserAvatar = ({user, ...props}: UserAvatarProps) => {
    
   return (
-    <Avatar>
+    <Avatar {...props}>
         {user.image ? (
-            <AvatarImage src={user.image}/>
+            <AvatarImage src={user.image} />
         ) : (
-            <AvatarImage src={userImage.src}/>
+            <AvatarImage src={userImage.src} />
         )
         }
     </Avatar>

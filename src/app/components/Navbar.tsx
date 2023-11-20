@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/ui/Button'
 import { getServerSession } from 'next-auth'
-import { authOptions } from '@/api/options'
 import { UserAccountNav } from '@/components/UserAccountNav'
+import { authOptions } from '../lib/auth'
 
 
 
@@ -22,10 +22,10 @@ const Navbar = async () => {
         <UserAccountNav user={session.user}/>
       ) : (
         <Link
-          href='/sign-in' 
+          href='/sign-up' 
           className={cn(buttonVariants({ variant: 'outline'}), 'bg-dark-green')}
         >
-          Sign In
+          Sign Up
         </Link>
       )}
       
