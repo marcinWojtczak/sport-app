@@ -49,11 +49,12 @@ export const authOptions: NextAuthOptions = {
             where: { email: credentials?.email }
           });
 
-          if(!existingUser) {
+          if(!existingUser || existingUser.password === null) {
             return null
           }
 
           //check if password match
+          
           const passwordMatch = await compare(credentials.password, existingUser.password);
 
           if(!passwordMatch) {
