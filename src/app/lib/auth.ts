@@ -39,22 +39,22 @@ export const authOptions: NextAuthOptions = {
           password: { label: "Password", type: "passrod", placeholder: "Password" },
         },
         async authorize(credentials) {
-          //chack to see if email and pasword exists in db
+          //chack to see if email and password exists in the db
           if(!credentials?.email || !credentials.password ) {
             return null
           }
 
-          //chack to see if user exists
+          ///check to see if the provided email matches to email in the db
           const existingUser = await db.user.findUnique({
             where: { email: credentials?.email }
           });
 
+          // If the user does not exist or the user's password is null, return null
           if(!existingUser || existingUser.password === null) {
             return null
           }
 
-          //check if password match
-          
+          //check to see if the provided password matches to password in the db
           const passwordMatch = await compare(credentials.password, existingUser.password);
 
           if(!passwordMatch) {

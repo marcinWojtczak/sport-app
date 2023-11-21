@@ -104,17 +104,17 @@ export const SignInForm = () => {
                         {...register("email")}
                         type="email"
                         placeholder='Email'
-                        className='border border-input w-full text-center h-9 rounded-md px-3 bg-accent'
+                        className='border border-input w-full text-center h-9 rounded-md px-3 '
                     />
                     {errors.email && (
-                        <p className='text-red-500'>{`${errors.email.message}`}</p>
+                        <p className='dark:text-red-500'>{`${errors.email.message}`}</p>
                     )}
     
                     <input
                         {...register("password")}
                         type="password"
                         placeholder='Password'
-                        className='border border-input w-full text-center h-9 rounded-md px-3 bg-accent'
+                        className='border border-input w-full text-center h-9 rounded-md px-3 '
                     />
                     {errors.password && (
                         <p className='text-red-500'>{`${errors.password.message}`}</p>

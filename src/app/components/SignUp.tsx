@@ -17,7 +17,7 @@ const SignUp = () => {
         Already on SportApp?{' '}
         <Link
           href='/sign-in'
-          className='hover:text-brand text-sm underline underline-offset-4'>
+          className='hover:text-brand text-sm underline underline-offset-4 dark:text-slate-100'>
           Sign In
         </Link>
       </p>

@@ -4,6 +4,8 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import { Toaster } from "@/components/ui/Toaster"
+import Providers from "@/components/Providers"
+
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -24,13 +26,15 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className='bg-white dark:bg-dark-blue text-dark dark:text-slate-50 antialiased'>
-        <Navbar />
-        
-        {authModal}
+      <body className='bg-white dark:bg-slate-900 text-dark dark:text-slate-50 antialiased'>
+      <Providers>
+          <Navbar />
+          
+          {authModal}
 
-        {children}
-        <Toaster />
+          {children}
+          <Toaster />
+        </Providers>
       </body>
     </html>
   )
