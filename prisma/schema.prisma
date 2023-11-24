@@ -47,6 +47,10 @@ model User {
   accounts      Account[]
   sessions      Session[]
   password      String?
+  gender        String?
+  Post          Post[]
+  Comment       Comment[]
+  age           String
 }
 
 model VerificationToken {
@@ -55,4 +59,25 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Post {
+  id          String    @id @default(cuid())
+  title       String
+  content     Json?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  author      User      @relation(fields: [authorId], references: [id])
+  authorId    String
+  comments    Comment[] 
+}
+
+model Comment {
+  id          String    @id @default(cuid())
+  text        String
+  createdAt   DateTime  @default(now())
+  author      User      @relation(fields: [authorId], references: [id])
+  authorId    String
+  post        Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId      String
 }
