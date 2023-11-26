@@ -5,11 +5,11 @@ import { signUpSchema, TSignUpSchema } from "@/app/lib/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
 import { Button, buttonVariants } from '@/components/ui/Button'
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import { cn } from '@/lib/utils'
-import { Icons } from '@/components/Icons'
 import { signIn } from 'next-auth/react'
 import { useToast } from '@/hooks/use-toast'
+import { Icons } from "../Icons"
 
 
 export const SignUpForm = () => {
@@ -169,7 +169,7 @@ export const SignUpForm = () => {
                         <p className='text-red-500 font-semibold'>{`${registerError}`}</p>
                     ) }
     
-                    <Button className='bg-mint'>Sign up</Button>
+                    <Button className='bg-emerald-400'>Sign up</Button>
                 </div>
             </form>
             
@@ -180,28 +180,28 @@ export const SignUpForm = () => {
             </div>
     
             <Button 
-                className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'bg-[#DB4437] hover:outline outline-1 outline-slate-100')}
+                className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'text-dark dark:text-slate-50 font-normal hover:outline outline-1 outline-slate-100 ')}
                 onClick={loginWithGoogle}
                 isLoading={googleIsLoading}
             >
-                {googleIsLoading ? null : <Icons.Google className='mr-1'/>}
-                Continue with Google
+                {googleIsLoading ? null : <Icons.Google />}
+                <p className='ml-2'>Continue with Google</p>
             </Button>
     
-            <Button className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'bg-[#4267B2] hover:outline outline-1 outline-slate-100')}
+            <Button className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'text-slate-50 bg-[#3b5998] font-normal hover:outline outline-1 outline-slate-100')}
                 onClick={loginWithFacebook}
                 isLoading={facebookIsLoading}
             >
-                {facebookIsLoading ? null : <Icons.Facebook className='mr-1'/>}
-                Continue with Facebook
+                {facebookIsLoading ? null : <Icons.Facebook className='mr-1 h-5 w-5'/>}
+                <p className='ml-2'>Continue with Facebook</p>
             </Button>
     
-            <Button className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'bg-black hover:outline outline-1 outline-slate-100')}
+            <Button className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'text-slate-50 bg-black font-normal hover:outline outline-1 outline-slate-100')}
                 onClick={loginWithGithub}
                 isLoading={githubIsLoading}
             >
-                {githubIsLoading ? null : <Icons.Github className='mr-1'/>}
-                Continue with GitHub
+                {githubIsLoading ? null : <Icons.Github className='mr-1 h-5 w-5'/>}
+                <p className='ml-2'>Continue with GitHub</p>
             </Button>
         </div>
       )

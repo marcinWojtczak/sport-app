@@ -50,7 +50,7 @@ model User {
   gender        String?
   Post          Post[]
   Comment       Comment[]
-  age           String
+  age           String?
 }
 
 model VerificationToken {

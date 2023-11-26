@@ -26,12 +26,15 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className='bg-white dark:bg-dark text-dark dark:text-slate-50 antialiased container flex justify-center'>
+      <body className='min-h-screen bg-white dark:bg-dark text-dark dark:text-slate-50 antialiased  flex justify-center'>
       <Providers>
           <Navbar />
           {authModal}
 
-          {children}
+          
+            {children}
+          
+          
           <Toaster />
         </Providers>
       </body>

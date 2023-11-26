@@ -26,6 +26,7 @@
       "@/hooks/*": ["./src/app/hooks/*"],
       "@/api/*": ["./src/app/api/auth/[...nextauth]/*"],
       "@/public/*": ["./src/app/public/*"],
+      "@/icons/*": ["./src/app/public/Icons/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

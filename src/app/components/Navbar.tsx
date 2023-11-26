@@ -16,7 +16,7 @@ const Navbar = async () => {
         <div className='flex items-center justify-center'>
           <SidebarToggle />
 
-          <Link href='/' className='text-slate-900 dark:text-white text-xl font-semibold tracking-wider'>
+          <Link href='/' className='text-slate-900 dark:text-white text-2xl font-semibold tracking-wider'>
             Sportify
           </Link>
       </div>

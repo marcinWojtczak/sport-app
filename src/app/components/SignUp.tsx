@@ -7,7 +7,7 @@ const SignUp = () => {
   return (
     <div className='container flex flex-col gap-2 items-center mx-auto sm:w-[400px]'>
         <div className='text-center'>
-            <h2 className='text-2xl font-bold mb-5'>Sign Up</h2>
+            <h2 className='text-2xl font-bold mb-5'>Join the Sport app community</h2>
             <p className='text-sm max-w-md mx-auto'>By continuing, you are setting up a Breadit account and agree to our User Agreement and Privacy Policy.</p>
         </div>
         

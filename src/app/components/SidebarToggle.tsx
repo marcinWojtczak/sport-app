@@ -8,14 +8,6 @@ import { LiaRunningSolid } from "react-icons/lia";
 import { GiHighKick } from "react-icons/gi";
 import SidebarMenu from './SidebarMenu';
 
-// const Menu = () => (
-//     <>
-//       <div className='fixed top-[80px] left-0 w-64 h-full flex flex-col items-start gap-7 p-8 bg-slate-950'>
-//         <SidebarMenu />
-//       </div>
-//     </>
-// )
-
 const SidebarToggle = () => {
     const [toggleMenu, setToggleMenu] = useState<boolean>(false)
 
@@ -29,7 +21,7 @@ const SidebarToggle = () => {
             <SlMenu size={20}/>
         </Button>
         {toggleMenu ? (
-          <div className='fixed top-[80px] lg:hidden left-0 w-64 h-full flex flex-col items-start gap-7 p-8 bg-slate-950'>
+          <div className='fixed top-[80px] lg:hidden left-0 w-64 h-full flex flex-col items-start gap-7 p-8 bg-white border-r border-input dark:bg-slate-950 text-slate-950 dark:text-white'>
             <SidebarMenu />
           </div>
         ) : null

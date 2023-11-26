@@ -120,7 +120,7 @@ export const SignInForm = () => {
                         <p className='text-red-500'>{`${errors.password.message}`}</p>
                     )}
     
-                    <Button>Sign in</Button>
+                    <Button className="bg-mint">Sign in</Button>
                 </div>
             </form>
             
