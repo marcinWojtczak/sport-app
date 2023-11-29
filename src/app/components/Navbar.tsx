@@ -33,7 +33,7 @@ const Navbar = async () => {
           ) : (
             <Link
               href='/sign-up' 
-              className={cn(buttonVariants({ variant: 'outline'}), 'hover:outline outline-1 outline-slate-100')}
+              className={cn(buttonVariants({ variant: 'outline'}))}
             >
               Sign Up
             </Link>

@@ -26,7 +26,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className='min-h-screen bg-white dark:bg-dark text-dark dark:text-slate-50 antialiased  flex justify-center'>
+      <body className='min-h-screen bg-slate-50 dark:bg-dark text-dark dark:text-slate-50 antialiased flex justify-center'>
       <Providers>
           <Navbar />
           {authModal}
