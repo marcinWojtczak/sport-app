@@ -11,7 +11,7 @@ const Navbar = async () => {
   const session = await getServerSession(authOptions)
   
   return (
-    <nav className='fixed z-50 top-0 left-0 right-0 h-20 border-b border-input flex items-center justify-between dark:bg-dark'>
+    <nav className='fixed z-50 top-0 left-0 right-0 h-20 border-b border-input flex items-center justify-between bg-slate-50 dark:bg-dark'>
       <div className='container max-w-[1400px] mx-auto flex items-center justify-between'>
         <div className='flex items-center justify-center'>
           <SidebarToggle />
