@@ -9,7 +9,7 @@ import { signOut } from "next-auth/react"
 import Image from 'next/image'
 
 interface UserAccounNavProps  {
-  user: Pick<User, 'name' | 'image' | 'email'>
+  user: Pick<User, 'name' | 'image' | 'email' | 'id'>
 }
 
 export const UserAccountNav = ({user}: UserAccounNavProps) => {
@@ -25,15 +25,17 @@ export const UserAccountNav = ({user}: UserAccounNavProps) => {
       <DropdownMenuContent className='border bprder-1 border-slate-400 p-4 bg-white rounded-sm' align='end'>
         <div className='my-2 px-2'>
           {user.name &&
-            <div className='flex items-center my-2'>
-                {user.image ? (
-                  <Image alt='user image' className='w-4 h-4 mr-2 rounded-[50%]' src={user.image} width='24' height='24'/>
-                ) : (
-                  <User2 className='w-4 h-4 mr-2'/>
-                )
-            }
-              <p className='font-bold text-sm text-black'>{user.name}</p>
-            </div> 
+          <Link href={`/${user.name}/${user.id}`}>
+              <div className='flex items-center my-2'>
+                  {user.image ? (
+                    <Image alt='user image' className='w-4 h-4 mr-2 rounded-[50%]' src={user.image} width='24' height='24'/>
+                  ) : (
+                    <User2 className='w-4 h-4 mr-2'/>
+                  )
+              }
+                <p className='font-bold text-sm text-black'>{user.name}</p>
+              </div>
+            </Link>
           }
           {user.email && 
             <div className='flex items-center'>
