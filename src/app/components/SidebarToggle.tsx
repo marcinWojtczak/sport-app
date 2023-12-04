@@ -2,10 +2,6 @@
 import React, { useState } from 'react'
 import { SlMenu } from "react-icons/sl";
 import { Button } from '@/ui/Button';
-import { GiBasketballBasket, GiSoccerField, GiTennisCourt  } from "react-icons/gi";
-import { PiVolleyballThin } from "react-icons/pi";
-import { LiaRunningSolid } from "react-icons/lia";
-import { GiHighKick } from "react-icons/gi";
 import SidebarMenu from './SidebarMenu';
 
 const SidebarToggle = () => {
