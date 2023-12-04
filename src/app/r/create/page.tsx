@@ -50,8 +50,8 @@ const Page = () => {
     
 
   return (
-    <div className='absolute top-20 container h-full max-w-3xl mx-auto'>
-        <div className='mt-20 bg-white  dark:bg-dark w-full h-fit rounded-lg space-y-6'>
+    <div className='absolute top-20 container max-w-3xl mx-auto'>
+        <div className='mt-20 bg-white dark:bg-dark w-full h-fit rounded-lg space-y-6'>
             <div className='overflow-hidden h-fit rounded-lg order-first md:order-last border border-emerald-400'>
                 <div className="bg-emerald-400 px-6 py-8">
                     <div className='flex justify-between items-center'>
@@ -65,16 +65,18 @@ const Page = () => {
                         Community names including capitalization cannot be changed.
                     </p>
                     <div >
-                        <form onSubmit={handleSubmit(onSubmit)} className='relative'>
-                            <p className='absolute text-sm left-0 top-[-60px] w-8 inset-y-0 grid place-items-center text-slate-400'>
-                                r/
-                            </p>
-                            <input
-                                className={cn(buttonVariants({ variant: 'outline' }), 'hover:outline outline-1 outline-input text-center')}
-                                {...register("subject")}
-                                type="text"
-                                
-                            />
+                        <form onSubmit={handleSubmit(onSubmit)} >
+                            <div className='relative'>
+                                <p className='absolute text-sm w-8 inset-y-0 grid place-items-center text-slate-400'>
+                                    r/
+                                </p>
+                                <input
+                                    className={cn(buttonVariants({ variant: 'outline' }), 'hover:outline outline-1 outline-input text-center')}
+                                    {...register("subject")}
+                                    type="text"
+                                    
+                                />
+                            </div>
                             {errors.subject && (
                                 <p className='text-red pt-1'>{`${errors.subject.message}`}</p>
                             )}
