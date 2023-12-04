@@ -8,9 +8,8 @@ import { Button, buttonVariants } from '@/components/ui/Button'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { signIn } from 'next-auth/react'
-import { useToast } from '@/hooks/use-toast'
 import { Icons } from "../Icons"
-
+import { toast } from "@/hooks/use-toast"
 
 export const SignUpForm = () => {
     const router = useRouter()
@@ -26,7 +25,7 @@ export const SignUpForm = () => {
     const [githubIsLoading, setGithubIsLoading] = useState<boolean>(false)
     const [registerError, setRegisterError] = useState<string | null>(null);
     
-    const { toast } = useToast()
+    
 
     const loginWithGoogle = async () => {
         
@@ -130,6 +129,7 @@ export const SignUpForm = () => {
                         type="text"
                         placeholder='User name'
                         className={cn(buttonVariants({variant: 'outline'}), 'hover:outline outline-1 outline-slate-100 text-center')}
+                        autoComplete="off"
                     />
                     {errors.username && (
                         <p className='text-red-500'>{`${errors.username.message}`}</p>
@@ -141,6 +141,7 @@ export const SignUpForm = () => {
                         type="email"
                         placeholder='Email'
                         className={cn(buttonVariants({ variant: 'outline' }), 'hover:outline outline-1 outline-slate-100 text-center')}
+                        autoComplete="off"
                     />
                     {errors.email && (
                         <p className='text-red-500'>{`${errors.email.message}`}</p>
@@ -151,6 +152,7 @@ export const SignUpForm = () => {
                         type="password"
                         placeholder='Password'
                         className={cn(buttonVariants({ variant: 'outline' }), 'hover:outline outline-1 outline-slate-100 text-center')}
+                        autoComplete="off"
                     />
                     {errors.password && (
                         <p className='text-red-500'>{`${errors.password.message}`}</p>
@@ -161,6 +163,7 @@ export const SignUpForm = () => {
                         type="password"
                         placeholder='Confirm password'
                         className={cn(buttonVariants({ variant: 'outline' }), 'hover:outline outline-1 outline-slate-100 text-center')}
+                        autoComplete="off"
                     />
                     {errors.confirmPassword && (
                         <p className='text-red-500'>{`${errors.confirmPassword.message}`}</p>
@@ -180,7 +183,7 @@ export const SignUpForm = () => {
             </div>
     
             <Button 
-                className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'text-dark dark:text-slate-50 font-normal hover:outline outline-1 outline-slate-100 ')}
+                className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'text-dark dark:text-slate-50 font-normal hover:outline outline-1 outline-slate-100 hover:bg-slate-100')}
                 onClick={loginWithGoogle}
                 isLoading={googleIsLoading}
             >
@@ -188,7 +191,7 @@ export const SignUpForm = () => {
                 <p className='ml-2'>Continue with Google</p>
             </Button>
     
-            <Button className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'text-slate-50 bg-[#3b5998] font-normal hover:outline outline-1 outline-slate-100')}
+            <Button className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'text-slate-50 bg-[#3b5998] hover:bg-[#3b5998]/80 font-normal hover:outline outline-1 outline-slate-100')}
                 onClick={loginWithFacebook}
                 isLoading={facebookIsLoading}
             >
@@ -196,7 +199,7 @@ export const SignUpForm = () => {
                 <p className='ml-2'>Continue with Facebook</p>
             </Button>
     
-            <Button className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'text-slate-50 bg-black font-normal hover:outline outline-1 outline-slate-100')}
+            <Button className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'text-slate-50 bg-black hover:bg-black/80 font-normal hover:outline outline-1 outline-slate-100')}
                 onClick={loginWithGithub}
                 isLoading={githubIsLoading}
             >
