@@ -13,9 +13,7 @@ export async function POST(request: Request) {
         if(!session?.user) {
             return new NextResponse('Unauthorized', { status: 401 })
         }
-        console.log(session.user)
-        console.log(session.user.id)
-       
+        
         const body: unknown = await request.json()
         const { subject } = postSchema.parse(body)
         
@@ -26,8 +24,8 @@ export async function POST(request: Request) {
             authorId: session.user.id,
            },
         })
-        console.log(post.title)
-        return new NextResponse(post.title)
+        
+        return new NextResponse("Post created")
     } catch(error: unknown) {
         if(error instanceof z.ZodError) {
             return new NextResponse(error.message, { status: 422 })
