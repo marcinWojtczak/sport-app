@@ -104,7 +104,7 @@ export const SignInForm = () => {
                         {...register("email")}
                         type="email"
                         placeholder='Email'
-                        className='border border-input w-full text-center h-9 rounded-md px-3 '
+                        className='border border-input w-full text-center h-9 rounded-md px-3 dark:bg-inherit'
                     />
                     {errors.email && (
                         <p className='dark:text-red-500'>{`${errors.email.message}`}</p>
@@ -114,7 +114,7 @@ export const SignInForm = () => {
                         {...register("password")}
                         type="password"
                         placeholder='Password'
-                        className='border border-input w-full text-center h-9 rounded-md px-3 '
+                        className='border border-input w-full text-center h-9 rounded-md px-3 dark:bg-inherit'
                     />
                     {errors.password && (
                         <p className='text-red-500'>{`${errors.password.message}`}</p>
@@ -131,28 +131,28 @@ export const SignInForm = () => {
             </div>
     
             <Button 
-                className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'bg-[#DB4437] hover:outline outline-1 outline-slate-300')}
+                className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'text-dark dark:text-slate-50 font-normal hover:outline outline-1 outline-slate-100 hover:bg-slate-100 ')}
                 onClick={loginWithGoogle}
                 isLoading={googleIsLoading}
             >
-                {googleIsLoading ? null : <Icons.Google className='mr-1'/>}
-                Continue with Google
+                {googleIsLoading ? null : <Icons.Google className='mr-1 h-5 w-5'/>}
+                <p className='ml-2'>Continue with Google</p>
             </Button>
     
-            <Button className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'bg-[#4267B2] hover:outline outline-1 outline-slate-300')}
+            <Button className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'text-slate-50 bg-[#3b5998] hover:bg-[#3b5998]/80 font-normal hover:outline outline-1 outline-slate-100')}
                 onClick={loginWithFacebook}
                 isLoading={facebookIsLoading}
             >
-                {facebookIsLoading ? null : <Icons.Facebook className='mr-1'/>}
-                Continue with Facebook
+                {facebookIsLoading ? null : <Icons.Facebook className='mr-1 h-5 w-5'/>}
+                <p className='ml-2'>Continue with Facebook</p>
             </Button>
     
-            <Button className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'bg-black hover:outline outline-1 outline-slate-300')}
+            <Button className={cn(buttonVariants({ variant: 'outline', size: 'sm'}), 'text-slate-50 bg-black hover:bg-black/80 font-normal hover:outline outline-1 outline-slate-100')}
                 onClick={loginWithGithub}
                 isLoading={githubIsLoading}
             >
-                {githubIsLoading ? null : <Icons.Github className='mr-1'/>}
-                Continue with GitHub
+                {githubIsLoading ? null : <Icons.Github className='mr-1 h-5 w-5'/>}
+                <p className='ml-2'>Continue with GitHub</p>
             </Button>
         </div>
       )
