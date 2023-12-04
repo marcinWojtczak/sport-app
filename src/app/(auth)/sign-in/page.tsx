@@ -7,7 +7,7 @@ import SignIn from '@/app/components/SignIn';
 
 const Page: FC = () => {
   return (
-    <div className='pt-[200px]'>
+    <div className='h-full'>
       <div className='h-full max-w-2xl mx-auto flex flex-col items-center justify-center gap-2'>
         <Link 
           href='/' 
