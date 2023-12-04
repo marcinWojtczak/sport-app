@@ -5,6 +5,7 @@ import './globals.css'
 import Navbar from '@/components/Navbar'
 import { Toaster } from "@/components/ui/Toaster"
 import Providers from "@/components/Providers"
+import Sidebar from './components/Sidebar'
 
 
 
@@ -27,17 +28,18 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body 
-        className='min-h-screen bg-slate-50 dark:bg-dark text-dark dark:text-slate-50 antialiased flex justify-center'
+        className='min-h-screen bg-slate-50 dark:bg-dark text-dark dark:text-slate-50 antialiased flex flex-col'
         
       >
       <Providers>
           <Navbar />
-          {authModal}
-
-          
-            {children}
-          
-          
+          <div className='flex w-high'>
+            <Sidebar /> 
+            {authModal}
+            <div className='w-full mt-20 p-8'>
+              {children}
+            </div>
+          </div>
           <Toaster />
         </Providers>
       </body>
