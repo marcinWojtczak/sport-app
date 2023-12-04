@@ -5,22 +5,49 @@ import { cn } from "@/app/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
-import { TSpostSchema } from "@/app/lib/validators/post";
+import axios, { AxiosError } from "axios";
+import { TPostSchema } from "@/app/lib/validators/post";
+import { useForm } from "react-hook-form"
+import { postSchema } from "@/app/lib/validators/post";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useCustomToast } from "@/app/hooks/use-custom-toast";
+
 
 const Page = () => {
-const [input, setInput] = useState<string>("")
-const router = useRouter()
+    
+    const router = useRouter()
+    const { 
+        register, 
+        handleSubmit, 
+        formState: { errors, isSubmitting }, 
+        } = useForm<TPostSchema>(
+            {resolver: zodResolver(postSchema)}
+        )
+    const { loginToast } = useCustomToast()
 
-const { mutate: CreatePost, isPending } = useMutation({
-    mutationFn: async () => {
-        const payload: TSpostSchema = {
-            subject: input
+
+    const createPostMutation = useMutation({
+        mutationFn: async (input: string) => {
+            const payload: TPostSchema = {
+                subject: input
+            }
+            const { data } = await axios.post('/api/post', payload)
+            console.log(data)
+            return data as string
+        },
+        onError: (err) => {
+            if(err instanceof AxiosError){
+                if(err.response?.status === 401) {
+                    return loginToast()
+                }
+            }
         }
-        const { data } = await axios.post('/api/post', payload)
-        return data as string
+    })
+
+    const onSubmit = (data: TPostSchema) => {
+        createPostMutation.mutate(data.subject)
     }
-})
+    
 
   return (
     <div className='absolute top-20 container h-full max-w-3xl mx-auto'>
@@ -37,31 +64,34 @@ const { mutate: CreatePost, isPending } = useMutation({
                     <p className='text-xs pb-2 text-slate-400'>
                         Community names including capitalization cannot be changed.
                     </p>
-                    <div className='relative'>
-                        <p className='absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-input dark:text-slate-400'>
-                            r/
-                        </p>
-                        <input
-                            className={cn(buttonVariants({ variant: 'outline' }), 'hover:outline outline-1 outline-input text-center')}
-                            value={input}
-                            onChange={(e) => setInput(e.target.value)}
-                        />
-                    </div>
-                </div>
+                    <div >
+                        <form onSubmit={handleSubmit(onSubmit)} className='relative'>
+                            <p className='absolute text-sm left-0 top-[-60px] w-8 inset-y-0 grid place-items-center text-slate-400'>
+                                r/
+                            </p>
+                            <input
+                                className={cn(buttonVariants({ variant: 'outline' }), 'hover:outline outline-1 outline-input text-center')}
+                                {...register("subject")}
+                                type="text"
+                                
+                            />
+                            {errors.subject && (
+                                <p className='text-red pt-1'>{`${errors.subject.message}`}</p>
+                            )}
 
-                <div className='flex justify-end gap-4 pb-4 pr-4'>
-                    <Button 
-                        variant="subtle"
-                        onClick={() => router.back()}
-                    >Cancel
-                    </Button>
-                    <Button
-                        variant="subtle"
-                        isLoading={isPending}
-                        disabled={input.length === 0}
-                        onClick={() => CreatePost()}
-                    >Create Event
-                    </Button >
+                            <div className='flex sm:justify-end gap-4 pb-4 pr-4'>
+                                <Button 
+                                    variant="outline"
+                                    onClick={() => router.back()}
+                                >Cancel
+                                </Button>
+                                <Button
+                                    variant="outline"
+                                >Create Event
+                                </Button >
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
