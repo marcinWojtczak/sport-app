@@ -14,14 +14,11 @@ export default async function Home() {
 
   
   return (
-    <main className='absolute top-20 p-0 h-full container max-w-[1400px]'>
-      <div className='flex flex-row w-full h-full'>
-        <Sidebar/>
-        <div className='container w-full mx-auto h-full pt-12'>
+      <div className='h-full flex flex-col items-center'>
           <h1 className='font-semibold text-xl md:text:3xl'>Your Page </h1>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6">
-            <div className='overflow-hidden h-fit rounded-lg order-first md:order-last border border-emerald-400'>
-              <div className="bg-emerald-400 px-6 py-4">
+          <div className="w-[90%] sm:w-[60%] md:gap-x-4 sm:py-6 mx-auto">
+            <div className='overflow-hidden h-fit rounded-lg order-first md:order-last border border-emerald-400 '>
+              <div className="bg-emerald-400 px-6 py-4 ">
                 <p className="font-semibold py-3 flex items-center gap-1.5">
                   <HomeIcon className='w-4 h-4' />
                   Home
@@ -40,8 +37,5 @@ export default async function Home() {
             </div>
           </div>
         </div>
-      </div>
-      
-    </main>
   )
 }
