@@ -25,7 +25,7 @@ export const UserAccountNav = ({user}: UserAccounNavProps) => {
       <DropdownMenuContent className='border bprder-1 border-slate-400 p-4 bg-white rounded-sm' align='end'>
         <div className='my-2 px-2'>
           {user.name &&
-          <Link href={`/${user.name}/${user.id}`}>
+          <Link href={`/user/${user.name}`}>
               <div className='flex items-center my-2'>
                   {user.image ? (
                     <Image alt='user image' className='w-4 h-4 mr-2 rounded-[50%]' src={user.image} width='24' height='24'/>
