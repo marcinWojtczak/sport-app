@@ -48,9 +48,10 @@ model User {
   sessions      Session[]
   password      String?
   gender        String?
-  Post          Post[]
-  Comment       Comment[]
+  posts          Post[]
+  comments       Comment[]
   age           String?
+  
 }
 
 model VerificationToken {

@@ -38,8 +38,7 @@ const SidebarMenu = () => {
         <Link href="basketball" className='flex items-center gap-2'>
             <GiHighKick size={26} />
             <p className='text-[14px]'>Martial Arts</p>
-        </Link>
-            
+        </Link>  
     </>
   )
 }

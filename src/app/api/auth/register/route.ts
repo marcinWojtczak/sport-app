@@ -2,13 +2,13 @@ import { db } from "@/app/lib/db";
 import { signUpSchema } from "@/app/lib/types";
 import { hash } from "bcrypt";
 import { NextResponse } from "next/server";
+import z from "zod"
 
 export async function POST (request: Request ) {
     try {
         const formData: unknown = await request.json()
-       
         const result = signUpSchema.safeParse(formData)
-
+        
         if (!result.success) {
             return NextResponse.json({ user: null, message: "Validation error" }, { status: 400 });
         }
@@ -48,8 +48,12 @@ export async function POST (request: Request ) {
 
         const { password: newUserPassword, ...rest } = newUser;
 
-        return NextResponse.json({ user: rest, message: "User cretaed success"}, { status: 201 })
+        return NextResponse.json({ user: rest, message: "User created success"}, { status: 201 })
     } catch(error) {
-         return NextResponse.json({ message: "Somethig went wrong"}, { status: 500 })
+        if(error instanceof z.ZodError) {
+            return NextResponse.json({ message: error.message})
+        }
+        return NextResponse.json({message: "Something went wrong"}, {status: 500})
     }
+    
 }
