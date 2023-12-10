@@ -19,7 +19,7 @@ export const UserAccountNav = ({user}: UserAccounNavProps) => {
       <DropdownMenuTrigger >
         <UserAvatar 
           user={{ name: user.name || null, image: user.image || null }}
-          className='rounded-[50%] w-8 h-8'
+          className='rounded-[50%] w-6 h-6'
         />
       </DropdownMenuTrigger >
       <DropdownMenuContent className='border bprder-1 border-slate-400 p-4 bg-white rounded-sm' align='end'>
