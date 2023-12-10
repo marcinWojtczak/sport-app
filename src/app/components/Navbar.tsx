@@ -6,6 +6,8 @@ import { UserAccountNav } from '@/components/UserAccountNav'
 import { authOptions } from '../lib/auth'
 import { ThemeToggle } from './ThemeToggle'
 import SidebarToggle from './SidebarToggle'
+import { IoCreateOutline } from "react-icons/io5";
+import { PenSquare } from 'lucide-react';
 
 const Navbar = async () => {
   const session = await getServerSession(authOptions)
@@ -26,10 +28,15 @@ const Navbar = async () => {
         </div>
 
       
-        <div className='hidden md:flex gap-4'>
+        <div className='hidden md:flex gap-4 items-center justify-center'>
           <ThemeToggle />
           {session?.user ? (
-            <UserAccountNav user={session.user}/>
+            <>
+              <Link href='/r/create'>
+                <PenSquare size={24} className='text-slate-600'/>
+              </Link>
+              <UserAccountNav user={session.user}/>
+            </>
           ) : (
             <Link
               href='/sign-up' 
