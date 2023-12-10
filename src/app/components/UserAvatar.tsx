@@ -14,7 +14,7 @@ export const UserAvatar = ({user, ...props}: UserAvatarProps) => {
         {user.image ? (
             <AvatarImage src={user.image} />
         ) : (
-            <AvatarImage src={userImage.src} className="w-6 h-6"/>
+            <AvatarImage src={userImage.src} />
         )
         }
     </Avatar>

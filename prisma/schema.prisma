@@ -38,28 +38,40 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model User {
-  id            String    @id @default(cuid())
-  name          String?   @unique
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  password      String?
-  gender        String?
-  posts          Post[]
-  comments       Comment[]
-  age           String?
-  
-}
-
 model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model User {
+  id                String    @id @default(cuid())
+  name              String?   @unique
+  email             String?   @unique
+  emailVerified     DateTime?
+  image             String?
+  accounts          Account[]
+  sessions          Session[]
+  password          String?
+  gender            String?
+  posts             Post[]
+  comments          Comment[]
+  age               String?
+  createdCommunity  Community[] 
+  subscription      Subscription[]
+}
+
+model Community {
+  id          String @id @default(cuid())
+  title       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  posts       Post[]
+  Creator     User? @relation( fields: [creatorId], references: [id]) 
+  creatorId   String
+  Subscription Subscription[]
 }
 
 model Post {
@@ -71,7 +83,19 @@ model Post {
   author      User      @relation(fields: [authorId], references: [id])
   authorId    String
   comments    Comment[] 
+  community   Community[] 
+  communityId String
 }
+
+model Subscription {
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String
+  community   Community @relation(fields: [communityId], references: [id])
+  communityId String
+
+  @@id([userId, communityId])
+}
+
 
 model Comment {
   id          String    @id @default(cuid())

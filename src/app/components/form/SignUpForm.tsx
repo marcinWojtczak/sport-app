@@ -10,6 +10,7 @@ import { cn } from '@/lib/utils'
 import { signIn } from 'next-auth/react'
 import { Icons } from "../Icons"
 import { toast } from "@/hooks/use-toast"
+import { Input } from "@/components/ui/Input"
 
 export const SignUpForm = () => {
     const router = useRouter()
@@ -124,11 +125,10 @@ export const SignUpForm = () => {
     
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='flex flex-col gap-2'>
-                    <input
+                    <Input
                         {...register("username")}
                         type="text"
                         placeholder='User name'
-                        className={cn(buttonVariants({variant: 'outline'}), 'hover:outline outline-1 outline-slate-100 text-center')}
                         autoComplete="off"
                     />
                     {errors.username && (
@@ -136,33 +136,30 @@ export const SignUpForm = () => {
                     )}
                     
     
-                    <input
+                    <Input
                         {...register("email")}
                         type="email"
                         placeholder='Email'
-                        className={cn(buttonVariants({ variant: 'outline' }), 'hover:outline outline-1 outline-slate-100 text-center')}
                         autoComplete="off"
                     />
                     {errors.email && (
                         <p className='text-red-500'>{`${errors.email.message}`}</p>
                     )}
     
-                    <input
+                    <Input
                         {...register("password")}
                         type="password"
                         placeholder='Password'
-                        className={cn(buttonVariants({ variant: 'outline' }), 'hover:outline outline-1 outline-slate-100 text-center')}
                         autoComplete="off"
                     />
                     {errors.password && (
                         <p className='text-red-500'>{`${errors.password.message}`}</p>
                     )}
     
-                    <input
+                    <Input
                         {...register("confirmPassword")}
                         type="password"
                         placeholder='Confirm password'
-                        className={cn(buttonVariants({ variant: 'outline' }), 'hover:outline outline-1 outline-slate-100 text-center')}
                         autoComplete="off"
                     />
                     {errors.confirmPassword && (

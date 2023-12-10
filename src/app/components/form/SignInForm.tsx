@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils'
 import { Icons } from '@/components/Icons'
 import { signIn } from 'next-auth/react'
 import { useToast } from '@/hooks/use-toast'
-
+import { Input } from "@/components/ui/Input"
 
 
 
@@ -99,27 +99,26 @@ export const SignInForm = () => {
     
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='flex flex-col gap-2'>
-                    <input
+                    <Input
                         {...register("email")}
                         type="email"
                         placeholder='Email'
-                        className='border border-input w-full text-center h-9 rounded-md px-3 dark:bg-inherit'
                     />
                     {errors.email && (
                         <p className='dark:text-red-500'>{`${errors.email.message}`}</p>
                     )}
     
-                    <input
+                    <Input
                         {...register("password")}
                         type="password"
                         placeholder='Password'
-                        className='border border-input w-full text-center h-9 rounded-md px-3 dark:bg-inherit'
+                    
                     />
                     {errors.password && (
                         <p className='text-red-500'>{`${errors.password.message}`}</p>
                     )}
     
-                    <Button className="bg-mint">Sign in</Button>
+                    <Button className="bg-emerald-400">Sign in</Button>
                 </div>
             </form>
             

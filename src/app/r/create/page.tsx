@@ -1,38 +1,37 @@
 "use client";
-import { useState } from "react";
 import { buttonVariants } from "@/components/ui/Button";
 import { cn } from "@/app/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
-import { TPostSchema } from "@/app/lib/validators/post";
+import { TCommunitySchema } from "@/app/lib/validators/community";
 import { useForm } from "react-hook-form"
-import { postSchema } from "@/app/lib/validators/post";
+import { communitySchema } from "@/app/lib/validators/community";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useCustomToast } from "@/app/hooks/use-custom-toast";
+import { authOptions } from '@/app/lib/auth'
+import { getServerSession } from 'next-auth'
 
 
-const Page = () => {
-    
+const Page =  () => {
     const router = useRouter()
     const { 
         register, 
         handleSubmit, 
-        formState: { errors, isSubmitting }, 
-        } = useForm<TPostSchema>(
-            {resolver: zodResolver(postSchema)}
+        formState: { errors }, 
+        } = useForm<TCommunitySchema>(
+            {resolver: zodResolver(communitySchema)}
         )
     const { loginToast } = useCustomToast()
 
-
-    const createPostMutation = useMutation({
+    const createCommunityMutation = useMutation({
         mutationFn: async (input: string) => {
-            const payload: TPostSchema = {
-                subject: input
+            const payload: TCommunitySchema = {
+                title: input
             }
-            const { data } = await axios.post('/api/post', payload)
-            console.log(data)
+            const { data } = await axios.post('/api/community', payload)
+            router.push('/')
             return data as string
         },
         onError: (err) => {
@@ -44,17 +43,17 @@ const Page = () => {
         }
     })
 
-    const onSubmit = (data: TPostSchema) => {
-        createPostMutation.mutate(data.subject)
+    const onSubmit = (data: TCommunitySchema) => {
+        createCommunityMutation.mutate(data.title)
     }
     
 
   return (
-    <div className='mt-20 bg-white dark:bg-dark w-full h-fit rounded-lg space-y-6'>
+    <div className='mt-20 bg-white dark:bg-dark max-w-[800px] mx-auto h-fit rounded-lg space-y-6'>
         <div className='overflow-hidden h-fit rounded-lg order-first md:order-last border border-emerald-400'>
             <div className="bg-emerald-400 px-6 py-8">
                 <div className='flex justify-between items-center'>
-                    <h1 className='text-xl font-semibold'>Create an Event</h1>
+                    <h1 className='text-xl font-semibold'>Create a Community</h1>
                 </div>
             </div>
 
@@ -63,7 +62,7 @@ const Page = () => {
                 <p className='text-xs pb-2 text-slate-400'>
                     Community names including capitalization cannot be changed.
                 </p>
-                <div >
+                <div>
                     <form onSubmit={handleSubmit(onSubmit)} >
                         <div className='relative'>
                             <p className='absolute text-sm w-8 inset-y-0 grid place-items-center text-slate-400'>
@@ -71,16 +70,16 @@ const Page = () => {
                             </p>
                             <input
                                 className={cn(buttonVariants({ variant: 'outline' }), 'hover:outline outline-1 outline-input text-center')}
-                                {...register("subject")}
+                                {...register("title")}
                                 type="text"
                                 
                             />
                         </div>
-                        {errors.subject && (
-                            <p className='text-red pt-1'>{`${errors.subject.message}`}</p>
+                        {errors.title && (
+                            <p className='text-red pt-1'>{`${errors.title.message}`}</p>
                         )}
 
-                        <div className='flex sm:justify-end gap-4 pb-4 pr-4'>
+                        <div className='flex sm:justify-end gap-4 pb-4 pr-4 mt-2 md:mt-0'>
                             <Button 
                                 variant="outline"
                                 onClick={() => router.back()}
@@ -88,7 +87,7 @@ const Page = () => {
                             </Button>
                             <Button
                                 variant="outline"
-                            >Create Event
+                            >{createCommunityMutation.isPending ? 'Creating...' : 'Create Community'}
                             </Button >
                         </div>
                     </form>
