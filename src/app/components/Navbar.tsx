@@ -6,7 +6,6 @@ import { UserAccountNav } from '@/components/UserAccountNav'
 import { authOptions } from '../lib/auth'
 import { ThemeToggle } from './ThemeToggle'
 import SidebarToggle from './SidebarToggle'
-import { IoCreateOutline } from "react-icons/io5";
 import { PenSquare } from 'lucide-react';
 
 const Navbar = async () => {
