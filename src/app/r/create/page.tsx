@@ -10,8 +10,7 @@ import { useForm } from "react-hook-form"
 import { communitySchema } from "@/app/lib/validators/community";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useCustomToast } from "@/app/hooks/use-custom-toast";
-import { authOptions } from '@/app/lib/auth'
-import { getServerSession } from 'next-auth'
+
 
 
 const Page =  () => {
@@ -34,9 +33,9 @@ const Page =  () => {
             router.push('/')
             return data as string
         },
-        onError: (err) => {
-            if(err instanceof AxiosError){
-                if(err.response?.status === 401) {
+        onError: (error) => {
+            if(error instanceof AxiosError){
+                if(error.response?.status === 401) {
                     return loginToast()
                 }
             }
