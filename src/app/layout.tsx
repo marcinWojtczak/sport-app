@@ -9,6 +9,7 @@ import Sidebar from './components/Sidebar'
 
 
 
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -36,7 +37,7 @@ export default function RootLayout({
           <div className='flex w-high'>
             <Sidebar /> 
             {authModal}
-            <div className='w-full mt-20 p-8'>
+            <div className='w-full mt-20 p-8 '>
               {children}
             </div>
           </div>

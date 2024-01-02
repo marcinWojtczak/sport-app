@@ -15,14 +15,14 @@ interface UserAccounNavProps  {
 export const UserAccountNav = ({user}: UserAccounNavProps) => {
   
   return (
-    <DropdownMenu>
+    <DropdownMenu >
       <DropdownMenuTrigger >
         <UserAvatar 
           user={{ name: user.name || null, image: user.image || null }}
           className='rounded-[50%] w-6 h-6'
         />
       </DropdownMenuTrigger >
-      <DropdownMenuContent className='border bprder-1 border-slate-400 p-4 bg-white rounded-sm' align='end'>
+      <DropdownMenuContent className='border bprder-1 border-slate-400 p-4 bg-white dark:bg-dark rounded-sm' align='end'>
         <div className='my-2 px-2'>
           {user.name &&
           <Link href={`/user/${user.name}`}>
@@ -33,43 +33,43 @@ export const UserAccountNav = ({user}: UserAccounNavProps) => {
                     <User2 className='w-4 h-4 mr-2'/>
                   )
               }
-                <p className='font-bold text-sm text-black'>{user.name}</p>
+                <p className='font-bold text-sm text-black dark:text-slate-50'>{user.name}</p>
               </div>
             </Link>
           }
           {user.email && 
-            <div className='flex items-center'>
-              <Mail className='w-4 h-4 mr-2 text-slate-500'/>
-              <p className='font-semibold text-xs text-slate-500'>{user.email}</p>
+            <div className='flex items-center text-slate-500 dark:text-slate-50'>
+              <Mail className='w-4 h-4 mr-2'/>
+              <p className='font-semibold text-xs'>{user.email}</p>
             </div>
           } 
         </div>
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem className='my-2'>
-          <Home className='w-4 h-4 mr-2 text-slate-500'/>
-          <Link href='/' className='text-slate-500'>Feed</Link>
+        <DropdownMenuItem className='my-2 text-slate-500 dark:text-slate-50'>
+          <Home className='w-4 h-4 mr-2'/>
+          <Link href='/' >Feed</Link>
         </DropdownMenuItem>
           
-        <DropdownMenuItem className='my-2'>
-          <MessageSquarePlus className='w-4 h-4 mr-2 text-slate-500'/>
-          <Link href='/r/create' className='text-slate-500'>Create community</Link>
+        <DropdownMenuItem className='my-2 text-slate-500 dark:text-slate-50'>
+          <MessageSquarePlus className='w-4 h-4 mr-2'/>
+          <Link href='/r/create' >Create community</Link>
         </DropdownMenuItem>
 
-        <DropdownMenuItem className='my-2 text-slate-500'>
-          <Cog className='w-4 h-4 mr-2 text-slate-500'/> 
+        <DropdownMenuItem className='my-2 text-slate-500 dark:text-slate-50'>
+          <Cog className='w-4 h-4 mr-2'/> 
           Settings
         </DropdownMenuItem>
 
         <DropdownMenuSeparator/>
 
         <DropdownMenuItem 
-          className='my-2 text-slate-500' 
+          className='my-2 text-slate-500 dark:text-slate-50' 
           onSelect={(e) => {
             e.preventDefault()
             signOut({callbackUrl: `${window.location.origin}/sign-in`
         })}}>
-          <LogOut className='w-4 h-4 mr-2 text-slate-500'/>          
+          <LogOut className='w-4 h-4 mr-2'/>          
           Sign out
         </DropdownMenuItem>
 

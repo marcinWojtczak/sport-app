@@ -16,7 +16,7 @@ export default function CreatePost({ session }: CreateCommunityPropos) {
     const pathName = usePathname()
 
   return (
-    <li className='overflow-hidden rounded-md bg-white shadow-md'>
+    <li className='overflow-hidden rounded-md bg-white dark:bg-slate-950 dark:border dark:border-slate-400 shadow-md'>
         <div className="h-full py-4 px-6 flex justify-between gap-4">
             <UserAvatar 
                 user={{

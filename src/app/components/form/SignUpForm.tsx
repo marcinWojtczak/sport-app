@@ -22,9 +22,7 @@ export const SignUpForm = () => {
         register,
         handleSubmit, 
         formState: { errors },
-    } = useForm<TSignUpSchema>({
-        resolver: zodResolver(signUpSchema)
-    })
+    } = useForm<TSignUpSchema>({resolver: zodResolver(signUpSchema)})
     
     const { loginWithProvider } = useProvidersAuthentication()
 

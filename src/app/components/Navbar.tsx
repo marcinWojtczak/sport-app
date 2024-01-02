@@ -32,7 +32,7 @@ const Navbar = async () => {
           {session?.user ? (
             <>
               <Link href='/r/create'>
-                <PenSquare size={24} className='text-slate-600'/>
+                <PenSquare size={24} className='text-slate-600 dark:text-slate-50'/>
               </Link>
               <UserAccountNav user={session.user}/>
             </>

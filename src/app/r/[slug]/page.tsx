@@ -36,10 +36,10 @@ const Page = async ({ params }: PageProps) => {
     if(!community) return notFound()
 
     return (
-    <>
+    <div>
       <h1 className='font-bold mb-4'>r/{community.title}</h1>
       <CreatePost session={session}/>
-    </>
+    </div>
   )
 }
 
