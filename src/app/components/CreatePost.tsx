@@ -14,6 +14,7 @@ interface CreateCommunityPropos {
 export default function CreatePost({ session }: CreateCommunityPropos) {
     const router = useRouter()
     const pathName = usePathname()
+    
 
   return (
     <li className='overflow-hidden rounded-md bg-white dark:bg-slate-950 dark:border dark:border-slate-400 shadow-md'>
