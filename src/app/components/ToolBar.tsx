@@ -1,6 +1,6 @@
 "use client"
 import { type Editor } from "@tiptap/react"
-import  { Bold, Heading2, List, Image, Link, Smile } from "lucide-react"
+import  { Bold, Heading2, List, Image, Link } from "lucide-react"
 import { Toggle } from "@/components/ui/Toggle"
 
 type ToolbarProps = {
