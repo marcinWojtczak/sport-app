@@ -53,7 +53,7 @@ export const UserAccountNav = ({user}: UserAccounNavProps) => {
           
         <DropdownMenuItem className='my-2 text-slate-500 dark:text-slate-50'>
           <MessageSquarePlus className='w-4 h-4 mr-2'/>
-          <Link href='/r/create' >Create community</Link>
+          <Link href='/s/create' >Create community</Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem className='my-2 text-slate-500 dark:text-slate-50'>
