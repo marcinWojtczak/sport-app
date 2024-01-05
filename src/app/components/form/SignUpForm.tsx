@@ -78,7 +78,7 @@ export const SignUpForm = () => {
                         autoComplete="off"
                     />
                     {errors.username && (
-                        <p className='text-red-500'>{`${errors.username.message}`}</p>
+                        <p className='text-red font-semibold'>{`${errors.username.message}`}</p>
                     )}
                     
     
@@ -89,7 +89,7 @@ export const SignUpForm = () => {
                         autoComplete="off"
                     />
                     {errors.email && (
-                        <p className='text-red-500'>{`${errors.email.message}`}</p>
+                        <p className='text-red font-semibold'>{`${errors.email.message}`}</p>
                     )}
     
                     <Input
@@ -99,7 +99,7 @@ export const SignUpForm = () => {
                         autoComplete="off"
                     />
                     {errors.password && (
-                        <p className='text-red-500'>{`${errors.password.message}`}</p>
+                        <p className='text-red font-semibold'>{`${errors.password.message}`}</p>
                     )}
     
                     <Input
@@ -109,10 +109,10 @@ export const SignUpForm = () => {
                         autoComplete="off"
                     />
                     {errors.confirmPassword && (
-                        <p className='text-red-500'>{`${errors.confirmPassword.message}`}</p>
+                        <p className='text-red font-semibold'>{`${errors.confirmPassword.message}`}</p>
                     )}
                     {registerError && (
-                        <p className='text-red-500 font-semibold'>{`${registerError}`}</p>
+                        <p className='text-red font-semibold'>{`${registerError}`}</p>
                     ) }
     
                     <Button className='bg-emerald-400'>Sign up</Button>
