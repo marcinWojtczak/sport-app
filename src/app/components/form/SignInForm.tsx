@@ -14,9 +14,11 @@ import useProvidersAuthentication from '@/hooks/login-providers'
 
 
 export const SignInForm = () => {
-    const [facebookIsLoading, setFacebookIsLoading] = useState<boolean>(false)
-    const [googleIsLoading, setGoogleIsLoading] = useState<boolean>(false)
-    const [githubIsLoading, setGithubIsLoading] = useState<boolean>(false)
+    const [facebookIsLoading] = useState<boolean>(false)
+    const [googleIsLoading] = useState<boolean>(false)
+    const [githubIsLoading] = useState<boolean>(false)
+    const [credentialError, setCredentialError] = useState<string | null>('')
+    
 
     const { toast } = useToast()
     const router = useRouter()
@@ -31,43 +33,41 @@ export const SignInForm = () => {
     })
 
     const onSubmit = async (data: TSignInSchema) => {
-        try {
-            await signIn('credentials', {
-                email: data.email,
-                password: data.password,
-            })
-        }catch (error) {
-            toast({
-                title: 'There was a problem',
-                description: 'Invalid credential',
-                variant: 'destructive'
-                
-            })
+        
+        const signInData = await signIn('credentials' ,{
+            email: data.email,
+            password: data.password,
+            redirect: false,
+        });
+
+        if(signInData?.error) {
+            setCredentialError('Wrong Credentials. Invalid username or password')
+            console.log(credentialError)
+        } else {
+            router.refresh()
+            router.push('/')
         }
     }
 
     return (
         <div className='flex flex-col gap-2 w-full'>
-    
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='flex flex-col gap-2'>
+                
                     <Input
                         {...register("email")}
                         type="email"
                         placeholder='Email'
                     />
-                    {errors.email && (
-                        <p className='dark:text-red-500'>{`${errors.email.message}`}</p>
-                    )}
-    
+
                     <Input
                         {...register("password")}
                         type="password"
                         placeholder='Password'
                     
                     />
-                    {errors.password && (
-                        <p className='text-red-500'>{`${errors.password.message}`}</p>
+                    {credentialError && (
+                        <p className='text-red font-semibold'>{credentialError}</p>
                     )}
     
                     <Button className="bg-emerald-400">Sign in</Button>
