@@ -3,9 +3,10 @@ import GithubProvider from "next-auth/providers/github"
 import FacebookProvider from "next-auth/providers/facebook"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { PrismaAdapter } from "@auth/prisma-adapter"
+import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { db } from "@/lib/db"
 import { compare } from "bcrypt"
+import { nanoid } from 'nanoid'
 
 
 export const authOptions: NextAuthOptions = {
@@ -36,7 +37,7 @@ export const authOptions: NextAuthOptions = {
         credentials: {
           username: { label: "Username", type: "text", placeholder: "User mama" },
           email: { label: "Email", type: "email", placeholder: "Email"  },
-          password: { label: "Password", type: "passrod", placeholder: "Password" },
+          password: { label: "Password", type: "password", placeholder: "Password" },
         },
         async authorize(credentials) {
           //chack to see if email and password exists in the db
@@ -71,20 +72,51 @@ export const authOptions: NextAuthOptions = {
     ],
     
     callbacks: {
-      async redirect({ baseUrl }) {
-        return baseUrl
-      },
-
-      async jwt({ token, user }) {
-        console.log("----------Token--------------: ", token)
-        
-        return token
-      },
-
-      async session({ session, token }) {
-        console.log("----------Session--------------: ", session)
+      async session({ token, session }) {
+        if (token) {
+          session.user.id = token.id
+          session.user.name = token.name
+          session.user.email = token.email
+          session.user.image = token.picture
+          session.user.username = token.username
+        }
+  
         return session
+        
       },
+  
+      async jwt({ token, user }) {
+        const dbUser = await db.user.findFirst({
+          where: {
+            email: token.email,
+          },
+        })
+  
+        if (!dbUser) {
+          token.id = user!.id
+          return token
+        }
+  
+        if (!dbUser.name) {
+          await db.user.update({
+            where: {
+              id: dbUser.id,
+            },
+            data: {
+              name: nanoid(10),
+            },
+          })
+        }
+  
+        return {
+          id: dbUser.id,
+          name: dbUser.name,
+          email: dbUser.email,
+          picture: dbUser.image,
+          username: dbUser.name,
+        }
+      },
+  
     }
   }
   

@@ -24,7 +24,7 @@
       "@/lib/*": ["./src/app/lib/*"],
       "@/ui/*": ["./src/app/components/ui/*"],
       "@/hooks/*": ["./src/app/hooks/*"],
-      "@/api/*": ["./src/app/api/auth/[...nextauth]/*"],
+      "@/api/*": ["./src/app/api/*"],
       "@/public/*": ["./src/app/public/*"],
       "@/icons/*": ["./src/app/public/Icons/*"],
     }
