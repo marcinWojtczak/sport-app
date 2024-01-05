@@ -9,6 +9,7 @@ import z from "zod"
 export async function POST(request: Request) {
     try {
         const session = await getServerSession(authOptions)
+        
 
         if(!session?.user) {
             return new NextResponse('Unauthorized', { status: 401 })
@@ -17,14 +18,29 @@ export async function POST(request: Request) {
         const body: unknown = await request.json()
         const { title } = communitySchema.parse(body)
         
+        const communityExists = await db.community.findFirst({
+            where: {
+                title,
+            }
+        })
+
+        if(communityExists) {
+            return new NextResponse('Community already exists', { status: 409})
+        }
         
-        const post = await db.community.create({
+        const community = await db.community.create({
            data: {
             title,
             creatorId: session.user.id,
            },
         })
         
+        await db.subscription.create({
+            data: {
+                userId: session.user.id,
+                communityId: community.id
+            }
+        })
         return new NextResponse("Community created")
     } catch(error: unknown) {
         if(error instanceof z.ZodError) {
