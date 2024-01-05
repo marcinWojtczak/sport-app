@@ -9,7 +9,7 @@ export const signUpSchema = z.object({
         .email({ message: "Invalid email address" }),
     password: z
         .string()
-        .min(4, { message: 'Password must be 8 or more characters long'}),
+        .min(8, { message: 'Password must be 8 or more characters long'}),
     confirmPassword: z
         .string()
         
@@ -28,7 +28,7 @@ export const signInSchema = z.object({
         .email({ message: "Invalid email address" }),
     password: z
         .string()
-        .min(2, { message: 'Password must be 8 or more characters long' })
+        .min(8, { message: 'Password must be 8 or more characters long' })
 })
 
 export type TSignInSchema = z.infer<typeof signInSchema>
