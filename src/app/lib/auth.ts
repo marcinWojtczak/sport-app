@@ -37,7 +37,7 @@ export const authOptions: NextAuthOptions = {
         credentials: {
           username: { label: "Username", type: "text", placeholder: "User mama" },
           email: { label: "Email", type: "email", placeholder: "Email"  },
-          password: { label: "Password", type: "passrod", placeholder: "Password" },
+          password: { label: "Password", type: "password", placeholder: "Password" },
         },
         async authorize(credentials) {
           //chack to see if email and password exists in the db
@@ -116,9 +116,7 @@ export const authOptions: NextAuthOptions = {
           username: dbUser.name,
         }
       },
-      redirect() {
-        return '/'
-      },
+  
     }
   }
   
