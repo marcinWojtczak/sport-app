@@ -19,8 +19,6 @@ export const SignInForm = () => {
     const [githubIsLoading] = useState<boolean>(false)
     const [credentialError, setCredentialError] = useState<string | null>('')
     
-
-    const { toast } = useToast()
     const router = useRouter()
     const { loginWithProvider } = useProvidersAuthentication()
 
