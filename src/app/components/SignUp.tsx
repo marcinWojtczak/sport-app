@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { SignUpForm } from '@/components/form/SignUpForm'
+import { SignUpForm } from '@/app/components/authenticationForms/SignUpForm'
 
 
 

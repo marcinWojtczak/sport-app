@@ -1,5 +1,5 @@
 import React from 'react'
-import { SignInForm } from '@/components/form/SignInForm'
+import { SignInForm } from '@/app/components/authenticationForms/SignInForm'
 import Link from 'next/link'
 
 
