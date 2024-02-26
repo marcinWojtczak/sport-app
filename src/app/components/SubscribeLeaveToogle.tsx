@@ -89,18 +89,24 @@ const SubscribeLeaveToogle = ( {communityId, communityName, isSubscribed }: Subs
       }
   })
 
-  return isSubscribed ? (
-    <Button className='w-full mt-1 mb-4'
-      onClick={() => unsubscribe()}
-      isLoading={isUnsubPending}
-    >Leave Community</Button>
-  ) : (
-    <Button 
-      onClick={() => subscribe()} 
-      isLoading={isSubPending}
-      className='w-full mt-1 mb-4'
-    >Join to Comunity</Button>
+  return (
+    <div className='py-4'>
+      {
+         isSubscribed ? (
+          <Button className='w-full my-1 dark:bg-dark-light'
+            onClick={() => unsubscribe()}
+            isLoading={isUnsubPending}
+          >Leave Community</Button>
+        ) : (
+          <Button 
+            onClick={() => subscribe()} 
+            isLoading={isSubPending}
+            className='w-full my-1'
+          >Join to Comunity</Button>
+        )
+      }
+  </div>
   )
+  
 }
-
 export default SubscribeLeaveToogle

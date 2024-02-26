@@ -17,24 +17,19 @@ const Navbar = async () => {
         <div className='flex items-center justify-center'>
           <SidebarToggle />
 
-          <Link href='/' className='text-slate-900 dark:text-white text-2xl font-semibold tracking-wider'>
+          <Link href='/' className='text-slate-900 dark:text-white text-2xl font-semibold tracking-wider ml-2'>
             Sportify
           </Link>
-      </div>
-
-        <div className='md:hidden'>
-          <ThemeToggle />
         </div>
 
-      
-        <div className='hidden md:flex gap-4 items-center justify-center'>
+        <div className='flex gap-3 items-center justify-center'>
           <ThemeToggle />
           {session?.user ? (
             <>
-              <Link href='/r/create'>
+              <Link href='/s/create'>
                 <PenSquare size={24} className='text-slate-600 dark:text-slate-50'/>
               </Link>
-              <UserAccountNav user={session.user}/>
+              <UserAccountNav user={session.user} />
             </>
           ) : (
             <Link
