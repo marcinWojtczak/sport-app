@@ -15,7 +15,7 @@ interface PageProps {
 const Page = async ({ params }: PageProps) => {
     const { slug } = params
    
-  console.log(slug)
+  
     const session = await getServerSession(authOptions)
 
     const community = await db.community.findFirst({

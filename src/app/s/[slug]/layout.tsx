@@ -64,9 +64,9 @@ const Layout = async ( {children, params: { slug }}: LayoutProps ) => {
         <div className="sm:container max-w-7xl mx-auto h-full pt-12">
             <div className='grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6'>
                 <div className='flex flex-col col-span-2 space-y-6'>{children}</div>
-                <div className='hidden md:block overflow-hidden h-fit rounded-lg border border-slate-400 order-first md:order-last bg-white dark:bg-slate-950'>
+                <div className='hidden md:block overflow-hidden h-fit rounded-lg border border-slate-400 order-first md:order-last bg-white dark:bg-dark'>
                     <div className='px-6 py-'>
-                        <p className='font-smibold py-3'>About r/{community.title}</p>
+                        <p className='font-smibold py-3'>About s/{community.title}</p>
                     </div>
 
                     <div className='divide-y divide-gray-100 px-6 py-4 text-sm leading-6'>
@@ -98,10 +98,10 @@ const Layout = async ( {children, params: { slug }}: LayoutProps ) => {
                         ) : null }
 
                         <Link 
-                            href={`/r/${slug}/submit`}
+                            href={`/s/${slug}/submit`}
                             className={buttonVariants({
                                 variant: 'default',
-                                className: 'w-full mb-6 dark:bg-emerald-400 text-white border-none'
+                                className: 'w-full mb-6 bg-emerald-400 text-white border-none hover:outline outline-1 outline-slate-800'
                             })}
                         >Create Post</Link>
                     </div>

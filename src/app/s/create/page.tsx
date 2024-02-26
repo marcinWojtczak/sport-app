@@ -33,11 +33,9 @@ const Page =  () => {
                 title: input
             }
             const { data } = await axios.post('/api/community', payload)
-            // router.push('/')
             return data as string
         },
         onError: (error) => {
-            console.log('Error:' ,error)
             if(error instanceof AxiosError){
                 if(error.response?.status === 422) {
                     setInvalidName('Invalid community name. Title must be 4 or more charcters long.')
@@ -46,7 +44,7 @@ const Page =  () => {
                     setExistingName('Community already exists. Pleas choose different community name.')
                 }
                 if (error.response?.status === 401) {
-                    setCredentailError('You nedd to be logged in to create communit.')
+                    setCredentailError('You need to be logged in to create community.')
                   }
             }
         }
@@ -54,6 +52,7 @@ const Page =  () => {
 
     const onSubmit = (data: TCommunitySchema) => {
         createCommunityMutation.mutate(data.title)
+        router.push(`/s/${data.title}`)
     }
     
 
