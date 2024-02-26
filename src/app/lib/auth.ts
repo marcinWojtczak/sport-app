@@ -116,7 +116,10 @@ export const authOptions: NextAuthOptions = {
           username: dbUser.name,
         }
       },
-  
+      async redirect({ url, baseUrl }) {
+        if (url.startsWith("/")) return `${baseUrl}${url}`
+        return baseUrl
+      }
     }
   }
   
