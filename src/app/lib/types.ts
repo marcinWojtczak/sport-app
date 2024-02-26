@@ -12,11 +12,10 @@ export const signUpSchema = z.object({
         .min(8, { message: 'Password must be 8 or more characters long'}),
     confirmPassword: z
         .string()
-        
-})
-.refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords must match",
-    path: ["confirmPassword"],
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+        message: "Passwords must match",
+        path: ["confirmPassword"],
 });
 
 export type TSignUpSchema = z.infer<typeof signUpSchema>
@@ -24,11 +23,9 @@ export type TSignUpSchema = z.infer<typeof signUpSchema>
 
 export const signInSchema = z.object({
     email: z
-        .string()
-        .email({ message: "Invalid email address" }),
+        .string(),
     password: z
         .string()
-        .min(8, { message: 'Password must be 8 or more characters long' })
 })
 
 export type TSignInSchema = z.infer<typeof signInSchema>

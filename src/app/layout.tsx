@@ -7,9 +7,6 @@ import { Toaster } from "@/components/ui/Toaster"
 import Providers from "@/components/Providers"
 import Sidebar from './components/Sidebar'
 
-
-
-
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
