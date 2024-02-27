@@ -114,6 +114,4 @@ model Media {
   authorId    String
   size        Float
   type        String
-  mediaId     String
-    
 }
