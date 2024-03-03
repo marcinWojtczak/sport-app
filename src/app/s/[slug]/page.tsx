@@ -37,7 +37,7 @@ const Page = async ({ params }: PageProps) => {
 
     return (
     <div>
-      <h1 className='font-bold mb-4'>r/{community.title}</h1>
+      <h1 className='font-bold mb-4'>s/{community.title}</h1>
       <CreatePost session={session}/>
     </div>
   )
