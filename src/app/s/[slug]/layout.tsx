@@ -33,32 +33,6 @@ const Layout = async ( {children, params: { slug }}: LayoutProps ) => {
 
     if(!community) return notFound()
 
-    const subscription = !session?.user
-        ? undefined
-        : await db.subscription.findFirst({
-            where: {
-                community: {
-                    title: slug,
-                },
-                user: {
-                    id: session.user.id
-                }
-            }
-        })
-    
-        const isSubscribed = !!subscription
-
-    if (!community) return notFound()
-    
-    const communityMembers = await db.subscription.count({
-        where: {
-            community: {
-                title: slug
-            }
-        }
-    })
-
-    
 
     return (
         <div className="sm:container max-w-7xl mx-auto h-full pt-12">
@@ -79,22 +53,10 @@ const Layout = async ( {children, params: { slug }}: LayoutProps ) => {
                             </dd>
                         </div>
 
-                        <div className='flex justify-between gap-4 py-3'>
-                            <dt className='text-slate-400'>Community members</dt>
-                            <dd className='flex items-start gap-x-2 text-slate-400' >
-                                {communityMembers}
-                            </dd>
-                        </div>
-
                         {community.creatorId === session?.user.id ? (
                             <div className='flex justify-between gap4 py-3'>
                                 <dt className='text-slate-400'>You created this community</dt>
                             </div>
-                        ) : null }
-
-
-                        {community.creatorId !== session?.user.id ? (
-                            <SubscribeLeaveToogle communityId={community.id} communityName={community.title} isSubscribed={isSubscribed}/>
                         ) : null }
 
                         <Link 
