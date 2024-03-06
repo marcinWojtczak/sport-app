@@ -1,5 +1,4 @@
 import { Avatar,  AvatarImage, } from "@/components/ui/Avatar"
-import userImage from '@/public/user.png'
 import { User } from 'next-auth';
 import { User2 } from "lucide-react"
 

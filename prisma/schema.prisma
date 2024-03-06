@@ -72,7 +72,6 @@ model Community {
   Creator         User?          @relation(fields: [creatorId], references: [id])
   creatorId       String
   communityPosts  CommunityPost[]
-
 }
 
 model Post {
