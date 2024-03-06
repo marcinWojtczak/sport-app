@@ -5,7 +5,7 @@ import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { db } from "@/lib/db"
-import { compare } from "bcrypt"
+import { compare } from "bcrypt";
 import { nanoid } from 'nanoid'
 
 
