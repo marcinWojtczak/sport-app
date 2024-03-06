@@ -48,7 +48,7 @@ export const UserAccountNav = ({user}: UserAccounNavProps) => {
 
         <DropdownMenuItem className='my-2 text-slate-500 dark:text-slate-50'>
           <Home className='w-4 h-4 mr-2'/>
-          <Link href='/' >Feed</Link>
+          <Link href='/' >Home</Link>
         </DropdownMenuItem>
           
         <DropdownMenuItem className='my-2 text-slate-500 dark:text-slate-50'>
