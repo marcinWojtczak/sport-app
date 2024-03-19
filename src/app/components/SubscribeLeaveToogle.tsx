@@ -1,7 +1,7 @@
 "use client"
 import { Button } from "@/ui/Button"
 import { useMutation } from "@tanstack/react-query"
-import { TCommunitySubscriptionSchema } from "@/lib/validators/community"
+import { TCommunitySubscriptionSchema } from "@/app/lib/validators/event"
 import axios, { AxiosError } from "axios"
 import { useCustomToast } from "@/hooks/use-custom-toast"
 import { useToast } from "@/hooks/use-toast"
