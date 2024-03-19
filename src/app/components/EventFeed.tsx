@@ -15,7 +15,6 @@ interface EventFeedProps {
   
 }
 
-
 export default function EventFeed({ user, events }: EventFeedProps) {
       
   return (
