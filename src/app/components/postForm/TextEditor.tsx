@@ -27,7 +27,7 @@ export default function TextEditor ({ onChange, handleChange, fileUrl, fileInput
             Placeholder.configure({
                 placeholder: 'Write Something...',
                 emptyNodeClass:
-                'first:before:text-gray-400 first:before:float-left first:before:content-[attr(data-placeholder)] first:before:pointer-events-none flex justify-center items-center h-full',
+                'first:before:text-gray-400 first:before:float-left first:before:content-[attr(data-placeholder)] first:before:pointer-events-none flex h-full',
             }),
         ],
         editorProps: {
