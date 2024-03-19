@@ -31,7 +31,7 @@ const Layout = async ( {children, params: { slug }}: LayoutProps ) => {
         }
     })
 
-    if(!community) return notFound()
+    if(!event) return notFound()
 
 
     return (
@@ -40,20 +40,20 @@ const Layout = async ( {children, params: { slug }}: LayoutProps ) => {
                 <div className='flex flex-col col-span-2 space-y-6'>{children}</div>
                 <div className='hidden md:block overflow-hidden h-fit rounded-lg border border-slate-400 order-first md:order-last bg-white dark:bg-dark'>
                     <div className='px-6 py-'>
-                        <p className='font-smibold py-3'>About s/{community.title}</p>
+                        <p className='font-smibold py-3'>About s/{event.name}</p>
                     </div>
 
                     <div className='divide-y divide-gray-100 px-6 py-4 text-sm leading-6'>
                         <div className='flex justify-between gap-x-4 py-3'>
                             <dt className='text-slate-400'>Created at</dt>
                             <dd className='text-slate-400'>
-                                <time dateTime={community?.createdAt.toDateString()}>
-                                    {formatDistanceToNow(new Date(community?.createdAt), { addSuffix: true })}
+                                <time dateTime={event?.createdAt.toDateString()}>
+                                    {formatDistanceToNow(new Date(event?.createdAt), { addSuffix: true })}
                                 </time>
                             </dd>
                         </div>
 
-                        {community.creatorId === session?.user.id ? (
+                        {event.creatorId === session?.user.id ? (
                             <div className='flex justify-between gap4 py-3'>
                                 <dt className='text-slate-400'>You created this community</dt>
                             </div>
