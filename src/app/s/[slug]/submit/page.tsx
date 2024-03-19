@@ -2,7 +2,8 @@ import { db } from '@/app/lib/db'
 import { notFound } from 'next/navigation'
 import React from 'react'
 import PostForm from '@/app/components/postForm/PostForm'
-
+import { getServerSession } from 'next-auth'
+import { authOptions } from "@/lib/auth"
 
 interface PageParams {
     params: {
@@ -11,13 +12,19 @@ interface PageParams {
 }
 
 const Page = async ({ params: { slug } }: PageParams) => {
-    const community = await db.community.findFirst({
+    
+    const session = await getServerSession(authOptions)
+
+    const decodedSlug = decodeURIComponent(slug)
+
+    const event = await db.event.findFirst({
         where: {
-            title: slug
-        }
+            name: decodedSlug
+        },
+  
     })
 
-    if(!community) notFound()
+    if(!event) notFound()
 
   return (
     <div className='flex flex-col items-start justify-center gap-6'>
@@ -26,12 +33,15 @@ const Page = async ({ params: { slug } }: PageParams) => {
                 <h3 className='text-base font-semibold leading-6 text-dark dark:text-white'>
                     Create Post
                 </h3>
-                <p className='ml-2 mt-1 truncate text-sm text-slate-600'>in s/{slug}</p>
+                <p className='ml-2 mt-1 truncate text-sm text-slate-600'>in s/{decodedSlug}</p>
             </div>
         </div>
 
         <div className='relative w-full '>
-           <PostForm communityId={community.id} />
+           <PostForm 
+                eventId={event.id} 
+                user={session}
+            />
         </div>
     </div>
   )
