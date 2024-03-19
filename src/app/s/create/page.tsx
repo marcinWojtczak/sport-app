@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/Button";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
-import { TCommunitySchema } from "@/app/lib/validators/community";
+import { TEventSchema } from "@/app/lib/validators/event";
 import { useForm } from "react-hook-form"
-import { communitySchema } from "@/app/lib/validators/community";
+import { eventSchema } from "@/app/lib/validators/event";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react";
 
@@ -22,17 +22,17 @@ const Page =  () => {
         register, 
         handleSubmit, 
         formState: { errors }, 
-        } = useForm<TCommunitySchema>(
-            {resolver: zodResolver(communitySchema)}
+        } = useForm<TEventSchema>(
+            {resolver: zodResolver(eventSchema)}
         )
     
 
-    const createCommunityMutation = useMutation({
+    const createEventMutation = useMutation({
         mutationFn: async (input: string) => {
-            const payload: TCommunitySchema = {
-                title: input
+            const payload: TEventSchema = {
+                name: input
             }
-            const { data } = await axios.post('/api/community', payload)
+            const { data } = await axios.post('/api/event', payload)
             return data as string
         },
         onError: (error) => {
@@ -50,9 +50,9 @@ const Page =  () => {
         }
     })
 
-    const onSubmit = (data: TCommunitySchema) => {
-        createCommunityMutation.mutate(data.title)
-        router.push(`/s/${data.title}`)
+    const onSubmit = (data: TEventSchema) => {
+        createEventMutation.mutate(data.name)
+        router.push(`/s/${data.name}`)
     }
     
 
@@ -61,14 +61,14 @@ const Page =  () => {
         <div className='overflow-hidden h-fit rounded-lg order-first md:order-last border border-emerald-400'>
             <div className="bg-emerald-400 px-6 py-8">
                 <div className='flex justify-between items-center'>
-                    <h1 className='text-xl font-semibold'>Create a Community</h1>
+                    <h1 className='text-xl font-semibold'>Create a Event</h1>
                 </div>
             </div>
 
             <div className="px-6 py-8">
                 <p className='text-lg font-medium'>Subject</p>
                 <p className='text-xs pb-2 text-slate-400'>
-                    Community names including capitalization cannot be changed.
+                    Event names including capitalization cannot be changed.
                 </p>
                 <div>
                     <form onSubmit={handleSubmit(onSubmit)} >
@@ -78,7 +78,7 @@ const Page =  () => {
                             </p>
                             <input
                                 className={cn(buttonVariants({ variant: 'outline' }), 'hover:outline outline-1 outline-input text-center')}
-                                {...register("title")}
+                                {...register("name")}
                                 type="text"
                             />
                         </div>
@@ -93,7 +93,7 @@ const Page =  () => {
                             </Button>
                             <Button
                                 variant="outline"
-                            >{createCommunityMutation.isPending ? 'Creating...' : 'Create Community'}
+                            >{createEventMutation.isPending ? 'Creating...' : 'Create Event'}
                             </Button >
                         </div>
                     </form>
