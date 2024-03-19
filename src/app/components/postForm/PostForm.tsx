@@ -6,105 +6,87 @@ import { TPostSchema, postSchema } from '@/lib/validators/post';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from "react-hook-form";
 import { Button } from '@/ui/Button';
-import Image from 'next/image';
 import { useMutation } from '@tanstack/react-query';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { Input } from '@/components/ui/Input';
 import { getSignedURL } from '@/app/components/postForm/actions';
 import { TFileSchema, fileSchema } from '@/app/lib/validators/file';
-
+import { createNewPost } from '@/app/components/postForm/actions';
+import { useRouter } from "next/navigation"
+import { Session } from 'next-auth';
 
 
 interface PostFormProps  {
-    communityId: string;
-}
+    eventId: string;
+    user: Session | null
+  }
 
-export default function PostForm({ communityId }: PostFormProps) {
+export default function PostForm({ eventId, user }: PostFormProps) {
   const [invalidTitle, setInvalidTitle] = useState<string | null>()
   const [credentailError, setCredentailError] = useState<string | null>()
-  const [fileError, setFileError] = useState<string | null>()
   const [fileInput, setFileInput] = useState<TFileSchema | undefined>(undefined)
   const [fileUrl, setFileUrl] = useState<string | undefined>(undefined)
   const [validationError, setValidationError] = useState<string []>()
-
   
+  const router = useRouter()
+ 
+
   const form = useForm<TPostSchema>({
     resolver: zodResolver(postSchema),
     mode: 'onChange',
     defaultValues: {
-      communityId,
+      eventId,
       title: '', 
       content: '',
      }  
   })
 
-  const {
-    formState: { errors },
-  } = useForm<TFileSchema>({resolver: zodResolver(fileSchema),
-    mode: 'onChange',
-    defaultValues: {
-      size: 0,
-      type: '',
-      name: ''
-    }
-  })
-  
-  
-
-  const createPostMutation = useMutation({
-    mutationFn: async (form: TPostSchema) => {
-      const payload: TPostSchema = {
-        title: form.title,
-        content: form.content,
-        communityId: form.communityId 
-      }
-
-      const data = await axios.post('/api/community/posts/create' , payload)
-      return data
-
-    },
-    onError: (error) => {
-      if(error instanceof AxiosError) {
-        if(error.response?.status === 422) {
-          setInvalidTitle("Invalid post name. Title must be 3 or more charcters long and can't be longer then 130 characters.")
-        }
-        if (error.response?.status === 401) {
-            setCredentailError('You need to be logged in to create community.')
-          }
-        }
-    }
-  })
-
-  
+ 
   const createFileMutation = useMutation({
-    mutationFn: async (file: TFileSchema | undefined) => {
-      console.log(file)
-      if(!file) {
-        return { failure: "File is undefined"}
-      }
-
-      const fileValidationResult = fileSchema.safeParse(file)
-      console.log(fileValidationResult)
+    mutationFn: async (fileInput: TFileSchema | undefined) => {
+      let mediaId: string | undefined
+      if(fileInput) {
+        const fileValidationResult = fileSchema.safeParse(fileInput)
     
-      if(!fileValidationResult.success) {
-        const errorMessages = fileValidationResult.error.errors.map(
-          (error) => error.message
-        );
-        setValidationError(errorMessages)
-        return { failure: errorMessages.join(", ") };
-      } 
+        if(!fileValidationResult.success) {
+          const errorMessages = fileValidationResult.error.errors.map(
+            (error) => error.message
+          );
 
-      const { size, type } = file
-      const signedURLResult = await getSignedURL(type, size)
-      
-      if (signedURLResult.success) {
-        const url = signedURLResult.success.url
-        const data = await axios.put(url, file, {
-          headers: {
-            'Content-Type': file?.type
+          setValidationError(errorMessages)
+          return { failure: errorMessages.join(", ") };
+        }
+
+        const { size, type } = fileInput
+
+        const signedURLResult = await getSignedURL(type, size )
+       
+        if (signedURLResult.success) {
+          
+          const {url, mediaId} = signedURLResult.success
+
+          await axios.put(url, fileInput, {
+            headers: {
+              'Content-Type': fileInput?.type
+            }
+          })
+
+          const postData: TPostSchema = {
+            title: form.getValues('title'),
+            content: form.getValues('content'),
+            eventId,
           }
-        })
-        return data
+        
+          await createNewPost(postData, mediaId)
+        }
+      } else {
+        const postData: TPostSchema = {
+          title: form.getValues('title'),
+          content: form.getValues('content'),
+          eventId,
+        }
+
+        await createNewPost(postData, mediaId)
       }
     },
     onError: (error) => {
@@ -113,14 +95,15 @@ export default function PostForm({ communityId }: PostFormProps) {
   })
 
   async function onSubmit(data: TPostSchema) {
-    await createPostMutation.mutateAsync(data);
-    await createFileMutation.mutateAsync(fileInput);
+     await createFileMutation.mutateAsync(fileInput);
+      router.push(`/user/${user?.user.name}`)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  
     const file = e.target.files?.[0]
     setFileInput(file)
-
+   
     if(fileUrl) {
       URL.revokeObjectURL(fileUrl)
     }
@@ -137,7 +120,7 @@ export default function PostForm({ communityId }: PostFormProps) {
     <div className='w-full'>
       {invalidTitle && <p className='text-red font-semibold mt-1'>{invalidTitle}</p>}
       {credentailError && <p className='text-red font-semibold mt-1'>{credentailError}</p>}
-      <Form {...form} >
+      <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
@@ -152,7 +135,6 @@ export default function PostForm({ communityId }: PostFormProps) {
                 </FormItem>
             )}
           />
-          
           <FormField
             control={form.control}
             name="content"
@@ -168,7 +150,7 @@ export default function PostForm({ communityId }: PostFormProps) {
           />
           <Button className='w-full mt-2 bg-emerald-400'>{createFileMutation.isPending ? 'Submitting...' : 'Submit'}</Button>
         </form>
-      </Form>
+        </Form>
     </div>
   )
 }
