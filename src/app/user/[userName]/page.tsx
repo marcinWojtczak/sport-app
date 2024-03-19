@@ -38,24 +38,35 @@ const Page = async ( { params: { userName }}: PageProps) => {
         <h1 className='font-bold text-2xl md:text:4xl'>{user?.name} </h1>
       </div>
       <div className='flex flex-wrap gap-4'>
-      <Button className={cn(buttonVariants({ variant: "outline"}), 'w-fit hover:text-white')}>
-          <Link href='/r/create'>Create a Community</Link>
-        </Button>
-        <Button className={cn(buttonVariants({ variant: "outline"}), 'w-fit hover:text-white')}>
-          <Link href=''>Create Post</Link>
-        </Button>
+        <Link className={cn(buttonVariants({ variant: "outline"}), 'w-fit hover:text-white')}
+          href='/s/create'
+        >
+          Create a Community
+        </Link>
+        <Link className={cn(buttonVariants({ variant: "outline"}), 'w-fit hover:text-white')}
+          href={''}
+        >
+          Create Post
+        </Link>
         <Button className={cn(buttonVariants({ variant: "outline"}), 'bg-input hover:text-white')}>
           Overview  
         </Button>
-        <Button className={cn(buttonVariants({ variant: "outline"}), 'bg-input hover:text-white')}>
-          Posts 
-        </Button>
-        <Button className={cn(buttonVariants({ variant: "outline"}), 'bg-input hover:text-white')}>
-          Comments  
-        </Button>
+        <Link
+          className={cn(buttonVariants({ variant: "outline"}), 'bg-input hover:text-white')}
+          href={`/user/${user?.name}/posts`}
+        >
+          Your Posts 
+        </Link>
+        <Link 
+          className={cn(buttonVariants({ variant: "outline"}), 'bg-input hover:text-white')}
+          href={`/${user?.name}/comments`}
+        >
+          Your Comments  
+        </Link>
       </div>
     </div>
   )
 }
 
 export default Page
+
