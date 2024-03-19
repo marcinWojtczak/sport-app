@@ -14,18 +14,19 @@ interface PageProps {
 
 const Page = async ({ params }: PageProps) => {
     const { slug } = params
-   
-  
+
+    const decodedSlug = decodeURIComponent(slug)
+    
     const session = await getServerSession(authOptions)
 
-    const community = await db.community.findFirst({
-      where: { title: slug },
+    const event = await db.event.findFirst({
+      where: { name: decodedSlug },
       include: {
         posts: {
           include: {
             author: true,
             comments: true,
-            community: true
+            event: true
           }
         }
       },
@@ -33,11 +34,11 @@ const Page = async ({ params }: PageProps) => {
       take: INFINITE_SCROLLING_PAGINATION_RESULTS
     })
 
-    if(!community) return notFound()
+    if(!event) return notFound()
 
     return (
     <div>
-      <h1 className='font-bold mb-4'>s/{community.title}</h1>
+      <h1 className='font-bold mb-4'>s/{event.name}</h1>
       <CreatePost session={session}/>
     </div>
   )
