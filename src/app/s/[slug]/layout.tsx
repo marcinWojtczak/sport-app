@@ -14,12 +14,13 @@ interface LayoutProps {
 
 const Layout = async ( {children, params: { slug }}: LayoutProps ) => {
     
-
+    const decodedSlug = decodeURIComponent(slug)
+    
     const session = await getServerSession(authOptions)
 
-    const community = await db.community.findFirst({
+    const event = await db.event.findFirst({
         where : { 
-            title: slug 
+            name: decodedSlug
         },
         include: {
             posts: {
